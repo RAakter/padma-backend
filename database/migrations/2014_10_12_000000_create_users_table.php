@@ -21,8 +21,10 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('address')->nullable();
             $table->boolean('is_customer')->default(false);
+            $table->unsignedBigInteger('created_by')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
