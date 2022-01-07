@@ -21,7 +21,7 @@ class BillController extends MainController
      */
     public function index()
     {
-        $data['bills'] = Bill::all();
+        $data = Bill::all();
         return $this->successResponse($data, 'Bill list', Response::HTTP_OK);
     }
 
@@ -43,11 +43,11 @@ class BillController extends MainController
      * Display the specified resource.
      *
      * @param  \App\Models\Bill  $bill
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function show(Bill $bill)
     {
-        //
+        return $this->successResponse($bill, 'Bill Viewed Successfully', Response::HTTP_OK);
     }
 
     /**
