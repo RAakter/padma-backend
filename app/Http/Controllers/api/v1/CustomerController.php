@@ -33,8 +33,8 @@ class CustomerController extends MainController
         $input = $request->only('name', 'email', 'password','address');
         $input['password'] = bcrypt($input['password']);
         $input['is_customer'] = true;
-        $input['created_by'] = auth()->user()->id;
-        $data['customer'] = User::create($input);
+//        $input['created_by'] = auth()->user()->id;
+        $data = User::create($input);
         return $this->successResponse($data, 'Customer Created Successfully', Response::HTTP_OK);
     }
 
@@ -58,10 +58,8 @@ class CustomerController extends MainController
      */
     public function update(StoreCustomer $request, User $customer)
     {
-        $input = $request->only('name', 'email', 'password','address');
-        $input['password'] = bcrypt($input['password']);
-        $customer->update($input);
-        $data['customer'] =  $customer;
+        $customer->update($request->only('name', 'email', 'address'));
+        $data =  $customer;
         return $this->successResponse($data, 'Customer Updated Successfully', Response::HTTP_OK);
     }
 

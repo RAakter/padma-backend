@@ -8,6 +8,7 @@ use App\Http\Controllers\Api\v1\MainController as MainController;
 use App\Models\Bill;
 use App\Http\Requests\StoreBillRequest;
 use App\Http\Requests\UpdateBillRequest;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -16,11 +17,12 @@ class BillController extends MainController
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $data['bills'] = Bill::where('customer_id', $request->id)->get();
+        return $this->successResponse($data, 'Bill list', Response::HTTP_OK);
     }
 
     /**
@@ -32,7 +34,6 @@ class BillController extends MainController
     public function store(StoreBillRequest $request)
     {
         $input = $request->only('customer_id', 'bill_month', 'year', 'amount', 'status', 'created_by');
-        $input['created_by'] = auth()->user()->id;
         $data['bill'] = Bill::create($input);
         SendMail::dispatch($request->customer_id);
         return $this->successResponse($data, 'Bill Created Successfully', Response::HTTP_OK);

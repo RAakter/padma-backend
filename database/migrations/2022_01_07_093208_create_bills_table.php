@@ -20,7 +20,7 @@ class CreateBillsTable extends Migration
             $table->year('year')->nullable();
             $table->decimal('amount', 11, 2)->nullable();
             $table->enum('status',['due','paid'])->default('due');
-            $table->unsignedBigInteger('created_by');
+            $table->unsignedBigInteger('created_by')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('customer_id')->references('id')->on('users')->onDelete('cascade');

@@ -21,13 +21,15 @@ Route::prefix('v1')->group(function () {
     Route::post('register', [UserController::class, 'register']);
     Route::post('login', [UserController::class, 'login']);
 
-Route::middleware('auth:sanctum')->group(function () {
-    Route::post('logout',  [UserController::class, 'logout']);
     Route::apiResource('customers', 'CustomerController')->except(['update']);
     Route::post('customers/update/{customer}', [CustomerController::class,'update']);
     Route::apiResource('bills', 'BillController')->except(['update']);
     Route::post('bills/update/{bill}', [BillController::class,'update']);
     Route::get('filter/bills', [BillController::class,'filterBill']);
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('logout',  [UserController::class, 'logout']);
+
 
 });
 });

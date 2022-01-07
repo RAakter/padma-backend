@@ -24,10 +24,7 @@ class StoreCustomer extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|min:3',
-            'email' => 'required|email|unique:users,email,'.$this->id.',id',
-            'password' => 'required|min:8',
-            'address' => 'required|string',
+
         ];
     }
 }

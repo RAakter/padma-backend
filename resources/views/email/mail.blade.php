@@ -1,1 +1,1 @@
-<p>Email Sent Successfully</p>
+<p>Bill Generated Successfully</p>

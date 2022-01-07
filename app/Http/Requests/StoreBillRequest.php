@@ -27,8 +27,7 @@ class StoreBillRequest extends FormRequest
             'customer_id' => 'required',
             'bill_month' => 'required',
             'year' => 'required',
-            'amount' => 'required',
-            'status' => 'required',
+            'amount' => 'required'
         ];
     }
 }
