@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api\v1;
 use App\Http\Controllers\Api\v1\MainController as MainController;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegistrationRequest;
+use App\Models\Bill;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,6 +58,9 @@ class UserController extends MainController
         $data['name'] =  $user->name;
         $data['email'] =  $user->email;
         $data['is_customer'] =  $user->is_customer;
+        if ($user->is_customer == 1){
+            $data['bills'] = Bill::where('customer_id', $user->id)->get();
+        }
         return $data;
     }
 }

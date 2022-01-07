@@ -58,7 +58,9 @@ class CustomerController extends MainController
      */
     public function update(StoreCustomer $request, User $customer)
     {
-        $customer->update($request->only('name', 'email', 'password','address'));
+        $input = $request->only('name', 'email', 'password','address');
+        $input['password'] = bcrypt($input['password']);
+        $customer->update($input);
         $data['customer'] =  $customer;
         return $this->successResponse($data, 'Customer Updated Successfully', Response::HTTP_OK);
     }
