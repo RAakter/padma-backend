@@ -19,9 +19,9 @@ class BillController extends MainController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index(Request $request)
+    public function index()
     {
-        $data['bills'] = Bill::where('customer_id', $request->id)->get();
+        $data['bills'] = Bill::all();
         return $this->successResponse($data, 'Bill list', Response::HTTP_OK);
     }
 
